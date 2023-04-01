@@ -31,6 +31,8 @@ const game = reactive<IGame>({
   words: [[], [], [], [], [], []],
 })
 
+onMounted(() => {})
+
 const addLetter = (letter: string) => {
   const currentWord = game.words.at(game.currentIteration)
   if (currentWord.length >= game.wordLength) return
@@ -47,6 +49,7 @@ const removeLetter = () => {
 
 const submitWord = () => {
   const currentWord = game.words.at(game.currentIteration)
+  // http://www.paraphraser.ru/api?c=vector&query=%D0%BA%D1%80%D1%8B%D1%88%D0%B8&top=3&lang=ru&format=json&token=TOKEN&forms=0&scores=0
   if (currentWord.length !== game.wordLength) return // notification
   console.log('submit word')
   game.currentIteration++
