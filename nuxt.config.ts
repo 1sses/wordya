@@ -4,7 +4,13 @@ export default defineNuxtConfig({
     // layoutTransition: { name: 'layout', mode: 'out-in' },
     // pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
+      meta: [
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1.0, user-scalable=no',
+        },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo-fill.svg' }],
       title: 'Wordya',
     },
   },
@@ -24,6 +30,6 @@ export default defineNuxtConfig({
     ],
   },
   imports: {
-    dirs: [],
+    dirs: ['lib/**'],
   },
 })

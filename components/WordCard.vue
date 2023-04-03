@@ -1,7 +1,12 @@
 <template lang="pug">
-.flex.gap-5.justify-center(style='user-select: none')
-  va-card.w-12.h-20(v-for='index in length', :key='index')
-    h1.va-h1.text-center {{ word[index - 1] }}
+.flex.gap-2.justify-center(style='user-select: none')
+  va-card.w-16.h-20.justify-center.items-center(
+    v-for='index in length',
+    :key='index',
+    :outlined='!!word[index - 1]',
+    style='display: flex'
+  )
+    h2.va-h2.text-center {{ word[index - 1]?.toUpperCase() }}
 </template>
 
 <script setup lang="ts">
