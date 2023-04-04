@@ -6,9 +6,9 @@ export const fiveInARowClient = axios.create({
 })
 
 export class FiveInARowAPI {
-  static async start(data: { email: string; password: string; name: string }) {
+  static async start() {
     try {
-      const response = await fiveInARowClient.post('/start', data)
+      const response = await fiveInARowClient.get('/start')
       return response.data
     } catch (error) {
       console.error(error)
@@ -16,13 +16,9 @@ export class FiveInARowAPI {
     }
   }
 
-  static async submitWord(data: {
-    email: string
-    password: string
-    name: string
-  }) {
+  static async checkWord(data: { word: string }) {
     try {
-      const response = await fiveInARowClient.post('/submit-word', data)
+      const response = await fiveInARowClient.post('/check-word', data)
       return response.data
     } catch (error) {
       console.error(error)
@@ -30,9 +26,9 @@ export class FiveInARowAPI {
     }
   }
 
-  static async end(data: { email: string; password: string; name: string }) {
+  static async end() {
     try {
-      const response = await fiveInARowClient.post('/end', data)
+      const response = await fiveInARowClient.get('/end')
       return response.data
     } catch (error) {
       console.error(error)

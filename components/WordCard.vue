@@ -4,9 +4,10 @@
     v-for='index in length',
     :key='index',
     :outlined='!!word[index - 1]',
+    :color='computeColor(word[index - 1]?.match)',
     style='display: flex'
   )
-    h2.va-h2.text-center {{ word[index - 1]?.toUpperCase() }}
+    h2.va-h2.text-center {{ word[index - 1]?.letter.toUpperCase() }}
 </template>
 
 <script setup lang="ts">
@@ -14,6 +15,20 @@ defineProps<{
   length: number
   word: string[]
 }>()
+
+const computeColor = (match: 'full' | 'letter' | 'no' | '-' | undefined) => {
+  switch (match) {
+    case 'full':
+      return 'success'
+    case 'letter':
+      return 'warning'
+    case 'no':
+      return 'secondary'
+    case '-':
+    default:
+      return 'backgroundPrimary'
+  }
+}
 </script>
 
 <style scoped></style>

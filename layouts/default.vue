@@ -5,7 +5,7 @@ div
       template(#left)
         va-navbar-item
           img(src='/logo.svg', width='80px', height='80px')
-          h1.va-h1 Wordya
+          h2.va-h2 Wordya
       //template(#right)
       //  va-navbar-item Dashboard
       //  va-navbar-item Reports

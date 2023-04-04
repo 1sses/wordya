@@ -27,6 +27,8 @@ section.h-screen.flex.flex-col.items-center.justify-evenly
 </template>
 
 <script setup lang="ts">
+const toast = useToast()
+
 const userData = reactive({
   name: '',
   email: '',
@@ -40,7 +42,13 @@ const register = async () => {
   if (!valid) return
 
   const response = await AuthAPI.register(userData)
-  console.log(response)
+  toast.init({
+    color: 'danger',
+    message: response.message,
+  })
+  if (response.ok) {
+    navigateTo('/')
+  }
 }
 </script>
 
