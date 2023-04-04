@@ -12,7 +12,7 @@ div
       //  va-navbar-item Users
       //  va-navbar-item
       //    va-icon.material-icons(size='large') account_circle
-  main.h-screen
+  main.h-screen(style='padding-top: 120px')
     slot
 </template>
 

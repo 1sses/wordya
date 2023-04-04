@@ -13,10 +13,13 @@
 <script setup lang="ts">
 defineProps<{
   length: number
-  word: string[]
+  word: Array<{
+    letter: string
+    match: 'full' | 'letter' | 'no' | '-'
+  }>
 }>()
 
-const computeColor = (match: 'full' | 'letter' | 'no' | '-' | undefined) => {
+const computeColor = (match) => {
   switch (match) {
     case 'full':
       return 'success'

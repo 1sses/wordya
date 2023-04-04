@@ -101,7 +101,7 @@
 <style scoped lang="scss">
 $boxWidth: 33px;
 $animationDuration: 15s;
-$animationStepDuration: $animationDuration / 7;
+$animationStepDuration: calc($animationDuration / 7);
 
 @keyframes slide {
   0% {
@@ -167,24 +167,24 @@ $animationStepDuration: $animationDuration / 7;
 
 @keyframes gradient1 {
   from {
-    stop-color: #4383b8;
+    stop-color: #154ec1;
   }
   50% {
-    stop-color: #8013b9;
+    stop-color: #3d9209;
   }
   to {
-    stop-color: #4383b8;
+    stop-color: #154ec1;
   }
 }
 @keyframes gradient2 {
   from {
-    stop-color: #4aa06c;
+    stop-color: #158de3;
   }
   50% {
-    stop-color: #b22358;
+    stop-color: #ffd43a;
   }
   to {
-    stop-color: #4aa06c;
+    stop-color: #158de3;
   }
 }
 
