@@ -11,6 +11,7 @@ section.h-full.flex.flex-col.justify-between.py-5(
         :word='game.words[it - 1]'
       )
   LetterKeyboard(
+    ref='keyboard',
     @letter='addLetter',
     @backspace='removeLetter',
     @enter='submitWord'
@@ -31,6 +32,8 @@ type IGame = {
 
 const toast = useToast()
 
+const keyboard = ref<any>(null)
+
 const game = reactive<IGame>({
   iterations: 6,
   currentIteration: 0,
@@ -49,6 +52,7 @@ onMounted(async () => {
         match: wordMatches[j],
       }))
   })
+  keyboard.value.colorize(game.words)
   game.currentIteration = response.data.result.matches.length
 })
 
@@ -83,22 +87,23 @@ const submitWord = async () => {
     })
     return
   }
-  if (response.ok) {
-    if (response.data.result.valid) {
-      const matches = response.data.result.matches
-      currentWord.forEach((obj, i) => (obj.match = matches[i]))
-    } else {
-      toast.init({
-        color: 'warning',
-        message: `Попробуйте другое слово!`,
-      })
-      return
-    }
-    if (response.data.result.matches.every((match) => match === 'full')) {
-      const response = await FiveInARowAPI.end()
-      console.log(response.data)
-    }
-    game.currentIteration++
+  if (!response.data.result.valid) {
+    toast.init({
+      color: 'warning',
+      message: `Попробуйте другое слово!`,
+    })
+    return
+  }
+  game.currentIteration++
+  const matches = response.data.result.matches
+  currentWord.forEach((obj, i) => (obj.match = matches[i]))
+  keyboard.value.colorize(game.words)
+  if (
+    response.data.result.matches.every((match) => match === 'full') ||
+    game.currentIteration === game.iterations
+  ) {
+    const response = await FiveInARowAPI.end()
+    console.log(response.data)
   }
 }
 </script>
