@@ -85,10 +85,10 @@ const colorize = (words: { letter: string; match: string }[][]) => {
         letterObj.match = 'no'
         continue
       }
+      letterObj.match = '-'
       // if (matches.has('letter')) return (letterObj.match = 'letter')
     }
   }
-  console.log(letters.value)
 }
 
 defineExpose({ colorize })

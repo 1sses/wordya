@@ -13,7 +13,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     if (currentRoute?.public) return
 
     if (!authStore.isAuthenticated) {
-      // TODO: fix first reAuth on loading
       await authStore.reAuthenticate()
     }
 

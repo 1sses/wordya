@@ -1,10 +1,24 @@
 <template lang="pug">
 section.h-full.flex.flex-col.justify-between.m-auto.py-5(class='max-w-[500px]')
+  va-modal(v-model='endGameModal.isOpen')
+    template(#content)
+      va-card-title(v-if='endGameModal.data.status === "WIN"') Победа!
+      va-card-title(v-else) Поражение :(
+      va-card-content.flex.flex-col.gap-10
+        div(v-if='endGameModal.data.status === "WIN"')
+          p Поздравляем!
+        div(v-else)
+          p А слово на самом деле было
+          h3.va-h3 {{ endGameModal.data.word }}
+      va-card-actions
+        va-button(@click='newGame') Попробовать еще
+        va-button(@click='navigateTo("/map")') Назад
   .h-full.flex.flex-col.justify-center
     .flex.flex-col.gap-2
       WordCard(
         v-for='(it, i) in game.iterations',
         :key='i',
+        ref='words',
         :length='game.wordLength',
         :word='game.words[it - 1]'
       )
@@ -30,7 +44,12 @@ type IGame = {
 
 const toast = useToast()
 
+const words = ref<any>(null)
 const keyboard = ref<any>(null)
+const endGameModal = reactive({
+  isOpen: false,
+  data: {},
+})
 
 const game = reactive<IGame>({
   iterations: 6,
@@ -39,23 +58,34 @@ const game = reactive<IGame>({
   words: [[], [], [], [], [], []],
 })
 
-onMounted(async () => {
+const loadGame = async () => {
   const response = await FiveInARowAPI.start()
-  if (response.data.matches.length === 0) return
+  if (response.data.matches.length === 0) {
+    game.words = [[], [], [], [], [], []]
+    game.currentIteration = 0
+    keyboard.value.colorize(game.words)
+    return
+  }
   response.data.matches.forEach((wordMatches, i) => {
     game.words[i] = response.data.attempts[i].split('').map((letter, j) => ({
       letter,
       match: wordMatches[j],
+      flipped: false,
     }))
+    setTimeout(() => {
+      words.value[i].flipWord()
+    })
   })
   keyboard.value.colorize(game.words)
   game.currentIteration = response.data.matches.length
-})
+}
+
+onMounted(loadGame)
 
 const addLetter = (letter: string) => {
   const currentWord = game.words.at(game.currentIteration)
   if (currentWord.length >= game.wordLength) return
-  currentWord.push({ letter, match: '-' })
+  currentWord.push({ letter, match: '-', flipped: false })
 }
 
 const removeLetter = () => {
@@ -93,6 +123,7 @@ const submitWord = async () => {
   game.currentIteration++
   const matches = response.data.matches
   currentWord.forEach((obj, i) => (obj.match = matches[i]))
+  words.value[game.currentIteration - 1].flipWord()
   keyboard.value.colorize(game.words)
   if (
     response.data.matches.every((match) => match === 'full') ||
@@ -100,7 +131,15 @@ const submitWord = async () => {
   ) {
     const response = await FiveInARowAPI.end()
     console.log(response.data)
+    endGameModal.data = response.data
+    endGameModal.isOpen = true
   }
+}
+
+const newGame = async () => {
+  endGameModal.isOpen = false
+  endGameModal.data = {}
+  await loadGame()
 }
 </script>
 

@@ -24,21 +24,6 @@ const steps = [
     content:
       'Five In A Row - увлекательный режим для любителей словесных головоломок. Отгадывайте слова, улучшайте свои лексические и логические навыки. Наслаждайтесь простой, но захватывающей игрой!',
   },
-  {
-    label: 'Второй поворот',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
-  {
-    label: 'Третий вариант',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
-  {
-    label: 'Чертвертый финал',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
 ]
 </script>
 

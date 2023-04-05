@@ -9,14 +9,14 @@ va-card
         p Например, мы пытаемся отгадать слово "БАТУТ" и вводим слово "БУХТА":
         WordCard(
           :length='5',
-          :word='[ { letter: "б", match: "full" }, { letter: "у", match: "letter" }, { letter: "х", match: "no" }, { letter: "т", match: "letter" }, { letter: "а", match: "letter" }, ]'
+          :word='[ { letter: "б", match: "full", flipped: true }, { letter: "у", match: "letter", flipped: true }, { letter: "х", match: "no", flipped: true }, { letter: "т", match: "letter", flipped: true }, { letter: "а", match: "letter", flipped: true }, ]'
         )
         p Зеленая буква "Б" означает, что она стоит на своем месте
         p Желтый цвет показывает, что такая буква есть в слове, но стоит не на том месте (например, "А")
         p Если буквы нет в загаданном слове, то она выделяется серым, как "Х".
         WordCard(
           :length='5',
-          :word='[ { letter: "б", match: "full" }, { letter: "а", match: "full" }, { letter: "т", match: "full" }, { letter: "у", match: "full" }, { letter: "т", match: "full" }, ]'
+          :word='[ { letter: "б", match: "full", flipped: true }, { letter: "а", match: "full", flipped: true }, { letter: "т", match: "full", flipped: true }, { letter: "у", match: "full", flipped: true }, { letter: "т", match: "full", flipped: true }, ]'
         )
         p Если слово полностью зеленое, значит вы угадали слово и победили в этом раунде!
         p Если же вам не удалось отгадать слово за 6 попыток, раунд считается проигранным.
@@ -27,7 +27,7 @@ va-card
   va-card-title {{ item.label }}
   WordCard(
     :length='5',
-    :word='[ { letter: "щ", match: "letter" }, { letter: "е", match: "full" }, { letter: "г", match: "no" }, { letter: "о", match: "letter" }, { letter: "л", match: "full" }, ]'
+    :word='[ { letter: "щ", match: "letter", flipped: true }, { letter: "е", match: "full", flipped: true }, { letter: "г", match: "no", flipped: true }, { letter: "о", match: "letter", flipped: true }, { letter: "л", match: "full", flipped: true }, ]'
   )
   va-card-content.whitespace-normal
     p.mb-3 {{ item.content }}
