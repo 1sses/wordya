@@ -35,4 +35,14 @@ export class FiveInARowAPI {
       if (isAxiosError(error)) return error.response?.data
     }
   }
+
+  static async statistics() {
+    try {
+      const response = await fiveInARowClient.get('/statistics')
+      return response.data
+    } catch (error) {
+      console.error(error)
+      if (isAxiosError(error)) return error.response?.data
+    }
+  }
 }

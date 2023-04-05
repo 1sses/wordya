@@ -8,7 +8,7 @@ section.h-full.flex.flex-col.items-center.justify-center
     height='100%'
   )
     template(#default='{ item }')
-      .mx-5
+      .mx-5(class='max-w-[500px]')
         FiveInARowGameSelect(
           :item='item',
           @start='navigateTo("/five-in-a-row")'

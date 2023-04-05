@@ -1,5 +1,5 @@
 <template lang="pug">
-section.h-screen.flex.flex-col.items-center.justify-evenly
+section.h-full.flex.flex-col.items-center.justify-evenly
   div
     h2.va-h2.text-center Регистрация
     h5.va-h5.text-center Добро пожаловать!
@@ -28,6 +28,7 @@ section.h-screen.flex.flex-col.items-center.justify-evenly
 
 <script setup lang="ts">
 const toast = useToast()
+const authStore = useAuthStore()
 
 const userData = reactive({
   name: '',
@@ -41,13 +42,14 @@ const register = async () => {
   const valid = form.value.validate()
   if (!valid) return
 
-  const response = await AuthAPI.register(userData)
-  toast.init({
-    color: 'danger',
-    message: response.message,
-  })
-  if (response.ok) {
+  try {
+    await authStore.register(userData)
     navigateTo('/')
+  } catch (error) {
+    toast.init({
+      color: 'danger',
+      message: error.message,
+    })
   }
 }
 </script>

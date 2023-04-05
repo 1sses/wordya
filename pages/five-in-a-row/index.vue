@@ -1,7 +1,5 @@
 <template lang="pug">
-section.h-full.flex.flex-col.justify-between.py-5(
-  style='max-width: 500px; margin: 0 auto'
-)
+section.h-full.flex.flex-col.justify-between.m-auto.py-5(class='max-w-[500px]')
   .h-full.flex.flex-col.justify-center
     .flex.flex-col.gap-2
       WordCard(
@@ -27,7 +25,7 @@ type IGame = {
   iterations: number
   currentIteration: number
   wordLength: number
-  words: Array<Array<string>>
+  words: Array<Array<{ letter: string; match: string }>>
 }
 
 const toast = useToast()
@@ -43,17 +41,15 @@ const game = reactive<IGame>({
 
 onMounted(async () => {
   const response = await FiveInARowAPI.start()
-  if (response.data.result.matches.length === 0) return
-  response.data.result.matches.forEach((wordMatches, i) => {
-    game.words[i] = response.data.result.game.attempts[i]
-      .split('')
-      .map((letter, j) => ({
-        letter,
-        match: wordMatches[j],
-      }))
+  if (response.data.matches.length === 0) return
+  response.data.matches.forEach((wordMatches, i) => {
+    game.words[i] = response.data.attempts[i].split('').map((letter, j) => ({
+      letter,
+      match: wordMatches[j],
+    }))
   })
   keyboard.value.colorize(game.words)
-  game.currentIteration = response.data.result.matches.length
+  game.currentIteration = response.data.matches.length
 })
 
 const addLetter = (letter: string) => {
@@ -87,7 +83,7 @@ const submitWord = async () => {
     })
     return
   }
-  if (!response.data.result.valid) {
+  if (!response.data.valid) {
     toast.init({
       color: 'warning',
       message: `Попробуйте другое слово!`,
@@ -95,11 +91,11 @@ const submitWord = async () => {
     return
   }
   game.currentIteration++
-  const matches = response.data.result.matches
+  const matches = response.data.matches
   currentWord.forEach((obj, i) => (obj.match = matches[i]))
   keyboard.value.colorize(game.words)
   if (
-    response.data.result.matches.every((match) => match === 'full') ||
+    response.data.matches.every((match) => match === 'full') ||
     game.currentIteration === game.iterations
   ) {
     const response = await FiveInARowAPI.end()

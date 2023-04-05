@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.select-none
   nav
     va-navbar(color='primary', shape, fixed, style='height: 120px')
       template(#left)

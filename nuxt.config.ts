@@ -30,6 +30,6 @@ export default defineNuxtConfig({
     ],
   },
   imports: {
-    dirs: ['lib/**'],
+    dirs: ['lib/**', 'store/**'],
   },
 })
