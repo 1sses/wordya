@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import axios, { isAxiosError } from 'axios'
 
 const authClient = axios.create({
-  baseURL: import.meta.env.VITE_APP_SERVER_URL + '/api/auth',
+  baseURL: import.meta.env.VITE_APP_SERVER_URL + '/auth',
   withCredentials: true,
 })
 

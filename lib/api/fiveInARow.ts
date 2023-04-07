@@ -1,7 +1,7 @@
 import axios, { isAxiosError } from 'axios'
 
 export const fiveInARowClient = axios.create({
-  baseURL: import.meta.env.VITE_APP_SERVER_URL + '/api/five-in-a-row',
+  baseURL: import.meta.env.VITE_APP_SERVER_URL + '/five-in-a-row',
   withCredentials: true,
 })
 
