@@ -43,7 +43,11 @@ const register = async () => {
   if (!valid) return
 
   try {
-    await authStore.register(userData)
+    const response = await authStore.register(userData)
+    toast.init({
+      color: 'success',
+      message: response.message,
+    })
     navigateTo('/')
   } catch (error) {
     toast.init({

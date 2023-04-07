@@ -7,11 +7,15 @@
 </template>
 
 <script setup lang="ts">
+type Game = {
+  title?: string
+  color?: string
+}
+
 const route = useRoute()
 
-const game = computed(() => {
+const game = computed<Game>(() => {
   const [_, gameName] = route.fullPath.split('/')
-  console.log(gameName)
   switch (gameName) {
     case 'five-in-a-row': {
       if (!route.query.difficulty) return {}

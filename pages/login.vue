@@ -36,8 +36,12 @@ const login = async () => {
   if (!valid) return
 
   try {
-    await authStore.login(userData)
-    navigateTo('/')
+    const response = await authStore.login(userData)
+    toast.init({
+      color: 'success',
+      message: response.message,
+    })
+    navigateTo('/map')
   } catch (error) {
     toast.init({
       color: 'danger',
