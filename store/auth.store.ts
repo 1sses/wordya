@@ -37,7 +37,6 @@ export const useAuthStore = defineStore('auth', {
 
     async reAuthenticate() {
       try {
-        console.log('reauth')
         const response = await authClient.get('/re-authenticate')
         if (!response.data.ok) throw new Error(response.data.message)
         this.isAuthenticated = true

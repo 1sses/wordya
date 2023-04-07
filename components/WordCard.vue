@@ -36,7 +36,7 @@ const computeColor = (match) => {
 }
 
 const flipWord = () => {
-  for (let i = 0; i < props.word.length; i++) {
+  for (let i = 0; i < props.length; i++) {
     setTimeout(() => {
       props.word[i].flipped = true
     }, i * 300)

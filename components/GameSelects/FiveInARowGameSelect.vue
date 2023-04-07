@@ -31,11 +31,6 @@ va-card
   )
   va-card-content.whitespace-normal
     p.mb-3 {{ item.content }}
-    va-chip.m-1(outline) Сыграно: {{ statistics.played ?? '-' }}
-    va-chip.m-1(outline) Побед: {{ statistics.wins ?? '-' }}
-    va-chip.m-1(outline) Среднее число попыток: {{ Math.round(statistics.averageAttempts * 100) / 100 ?? '-' }}
-    va-chip.m-1(outline) Максимально побед подряд: {{ statistics.maximumWins ?? '-' }}
-    va-chip.m-1(outline) Текущее число побед подряд: {{ statistics.currentWins ?? '-' }}
   va-card-actions
     va-button(color='success', @click='$emit("start")') Начать игру
     va-button(color='warning', @click='isOpen = true') Как играть?
@@ -54,12 +49,6 @@ defineEmits<{
 }>()
 
 const isOpen = ref(false)
-const statistics = ref({})
-
-onMounted(async () => {
-  const response = await FiveInARowAPI.statistics()
-  statistics.value = response.data
-})
 </script>
 
 <style scoped></style>

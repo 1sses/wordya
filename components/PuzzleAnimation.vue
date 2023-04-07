@@ -200,10 +200,7 @@ $animationStepDuration: calc($animationDuration / 7);
 svg#loading {
   display: block;
   margin: auto;
-  width: 20rem;
-  height: auto;
-  //transform : rotate(180deg);
-  //animation: rotate $animationDuration / 2 linear 0s infinite;
+  transform: rotate(180deg);
 
   #gradient > stop[offset='0%'] {
     animation: gradient1 $animationDuration ease 0s infinite;
