@@ -21,12 +21,13 @@ va-card
     va-button(
       :color='_difficulty.color',
       icon-right='play_arrow',
-      @click='navigateTo({ path: "/five-in-a-row/game", query: { difficulty } })'
+      @click='navigateTo({ path: "/five-in-a-row/game", query: { difficulty: statistics.difficulty } })'
     ) Играть
 </template>
 
 <script setup lang="ts">
 type Statistics = {
+  difficulty: number
   played: number
   wins: number
   averageAttempts: number
@@ -35,23 +36,16 @@ type Statistics = {
 }
 
 const props = defineProps<{
-  difficulty: number
+  statistics: Statistics
 }>()
 
 defineEmits<{
   (e: 'start')
 }>()
 
-const statistics = ref<Statistics>({})
-
-const _difficulty = computed(() => fiveInARowDifficulties[props.difficulty])
-
-onMounted(async () => {
-  const response = await FiveInARowAPI.statistics({
-    difficulty: props.difficulty,
-  })
-  statistics.value = response.data
-})
+const _difficulty = computed(
+  () => fiveInARowDifficulties[props.statistics.difficulty]
+)
 </script>
 
 <style scoped></style>

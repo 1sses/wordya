@@ -66,7 +66,7 @@ const loadGame = async () => {
   if (response.data.matches.length === 0) {
     game.words = [[], [], [], [], [], []]
     game.currentIteration = 0
-    keyboard.value.colorize(game.words)
+    keyboard.value?.colorize(game.words)
     return
   }
   response.data.matches.forEach((wordMatches, i) => {
@@ -76,10 +76,10 @@ const loadGame = async () => {
       flipped: false,
     }))
     setTimeout(() => {
-      words.value[i].flipWord()
+      words.value[i]?.flipWord()
     })
   })
-  keyboard.value.colorize(game.words)
+  keyboard.value?.colorize(game.words)
   game.currentIteration = response.data.matches.length
 }
 

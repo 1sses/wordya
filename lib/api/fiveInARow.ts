@@ -18,7 +18,7 @@ export class FiveInARowAPI {
 
   static async checkWord(data: { word: string; difficulty: number }) {
     try {
-      const response = await fiveInARowClient.post('/check-word', data)
+      const response = await fiveInARowClient.patch('/check-word', data)
       return response.data
     } catch (error) {
       console.error(error)
@@ -28,7 +28,7 @@ export class FiveInARowAPI {
 
   static async end(data: { difficulty: number }) {
     try {
-      const response = await fiveInARowClient.post('/end', data)
+      const response = await fiveInARowClient.patch('/end', data)
       return response.data
     } catch (error) {
       console.error(error)
@@ -36,9 +36,9 @@ export class FiveInARowAPI {
     }
   }
 
-  static async statistics(data: { difficulty: number }) {
+  static async statistics() {
     try {
-      const response = await fiveInARowClient.post('/statistics', data)
+      const response = await fiveInARowClient.get('/statistics')
       return response.data
     } catch (error) {
       console.error(error)

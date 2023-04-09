@@ -1,5 +1,6 @@
 <template lang="pug">
 section.h-full.flex.flex-col.items-center.justify-center
+  UserPreview
   va-carousel(
     v-model='step',
     :items='steps',
