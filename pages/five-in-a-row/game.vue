@@ -12,7 +12,7 @@ section.h-full.flex.flex-col.justify-between.m-auto.py-5(class='max-w-[500px]')
           h3.va-h3 {{ endGameModal.data.word }}
       va-card-actions
         va-button(@click='newGame') Попробовать еще
-        va-button(@click='navigateTo("/five-in-a-row")') Назад
+        va-button(@click='navigateTo("/five-in-a-row", { replace: true })') Назад
   .h-full.flex.flex-col.justify-center
     .flex.flex-col.gap-2
       WordCard(
