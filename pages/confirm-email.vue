@@ -12,12 +12,13 @@ section.h-screen.flex.flex-col.items-center.justify-evenly
 
 <script setup lang="ts">
 const route = useRoute()
+const authStore = useAuthStore()
 
 const status = ref<'success' | 'fail' | 'pending'>('pending')
 
 onMounted(async () => {
   const token = route.query.token as string
-  const response = await AuthAPI.confirmEmail(token)
+  const response = await authStore.confirmEmail({ token })
   if (response.ok) {
     status.value = 'success'
   } else {

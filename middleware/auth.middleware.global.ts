@@ -9,17 +9,15 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const authStore = useAuthStore()
     const currentRoute = routes.find((route) => route.path === to.fullPath)
 
+    // 404
+    if (!currentRoute) return
+
     // AUTHENTICATION
-    if (currentRoute?.public) return
+    if (currentRoute.public) return
 
     if (!authStore.isAuthenticated) {
       await authStore.reAuthenticate()
     }
-
-    // PERMISSIONS
-    // if (!currentRoute?.permissions.includes(user?.permission)) {
-    //   return navigateTo('/login')
-    // }
   } catch (e: any) {
     console.error(e.message)
     return navigateTo('/login')

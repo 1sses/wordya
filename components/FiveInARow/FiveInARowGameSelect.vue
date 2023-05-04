@@ -24,26 +24,19 @@ va-card
         p По правилам русских кроссвордов, буква "Ё" заменяется на "Е" во всех словах.
       va-card-actions
         va-button(@click='isOpen = false') Понятно
-  va-card-title {{ item.label }}
+  va-card-title Five In A Row
   WordCard(
     :length='5',
     :word='[ { letter: "щ", match: "letter", flipped: true }, { letter: "е", match: "full", flipped: true }, { letter: "г", match: "no", flipped: true }, { letter: "о", match: "letter", flipped: true }, { letter: "л", match: "full", flipped: true }, ]'
   )
   va-card-content.whitespace-normal
-    p.mb-3 {{ item.content }}
+    p.mb-3 Five In A Row - увлекательный режим для любителей словесных головоломок. Отгадывайте слова, улучшайте свои лексические и логические навыки. Наслаждайтесь простой, но захватывающей игрой!
   va-card-actions
     va-button(color='success', @click='$emit("start")') Начать игру
     va-button(color='warning', @click='isOpen = true') Как играть?
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  item: {
-    label: string
-    content: string
-  }
-}>()
-
 defineEmits<{
   (e: 'start')
 }>()

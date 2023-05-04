@@ -20,6 +20,10 @@ export const routes = [
     public: false,
   },
   {
+    path: '/achievements',
+    public: false,
+  },
+  {
     path: '/five-in-a-row',
     public: false,
   },

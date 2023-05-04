@@ -11,7 +11,7 @@ section.h-full.flex.flex-col.items-center.justify-center
     template(#default='{ item }')
       .mx-5(class='max-w-[500px]')
         FiveInARowGameSelect(
-          :item='item',
+          v-if='item.name === "five-in-a-row"',
           @start='navigateTo("/five-in-a-row")'
         )
 </template>
@@ -21,9 +21,7 @@ const step = ref(0)
 
 const steps = [
   {
-    label: 'Five In A Row',
-    content:
-      'Five In A Row - увлекательный режим для любителей словесных головоломок. Отгадывайте слова, улучшайте свои лексические и логические навыки. Наслаждайтесь простой, но захватывающей игрой!',
+    name: 'five-in-a-row',
   },
 ]
 </script>

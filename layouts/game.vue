@@ -19,10 +19,10 @@ const game = computed<Game>(() => {
   switch (gameName) {
     case 'five-in-a-row': {
       if (!route.query.difficulty) return {}
-      const difficulty = fiveInARowDifficulties[+route.query.difficulty].label
+      const difficulty = fiveInARowDifficulties[+route.query.difficulty]
       return {
-        title: `Wordya - Five In A Row - ${difficulty}`,
-        color: fiveInARowDifficulties[+route.query.difficulty].color,
+        title: `Wordya - Five In A Row - ${difficulty.label}`,
+        color: difficulty.color,
       }
     }
   }

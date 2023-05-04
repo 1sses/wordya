@@ -2,7 +2,16 @@
 va-card
   va-card-title Профиль
   va-card-content
-    h3 Добро пожаловать, {{ user?.name }}!
+    h3 Добро пожаловать
+      |
+      ClientOnly , {{ user?.name }}
+      | !
+  va-card-actions
+    va-button(
+      color='success',
+      icon='stars',
+      @click='navigateTo("/achievements")'
+    ) Достижения
 </template>
 
 <script setup lang="ts">
