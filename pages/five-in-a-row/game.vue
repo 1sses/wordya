@@ -120,7 +120,7 @@ const submitWord = async () => {
   if (!response.data.valid) {
     toast.init({
       color: 'warning',
-      message: `Попробуйте другое слово!`,
+      message: `Попробуйте другое слово! Например: ОКЕАН`,
     })
     return
   }
