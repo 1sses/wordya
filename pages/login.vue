@@ -12,6 +12,7 @@ section.h-full.flex.flex-col.items-center.justify-evenly
     va-input(
       v-model='userData.password',
       label='Пароль',
+      type='password',
       :rules='[(value) => (value && value.length > 0) || "Field is required"]'
     )
     va-button(@click='login') Войти
