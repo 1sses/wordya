@@ -30,16 +30,16 @@ va-card
     :word='[ { letter: "щ", match: "letter", flipped: true }, { letter: "е", match: "full", flipped: true }, { letter: "г", match: "no", flipped: true }, { letter: "о", match: "letter", flipped: true }, { letter: "л", match: "full", flipped: true }, ]'
   )
   va-card-content.whitespace-normal
-    p.mb-3 Five In A Row - увлекательный режим для любителей словесных головоломок. Отгадывайте слова, улучшайте свои лексические и логические навыки. Наслаждайтесь простой, но захватывающей игрой!
+    p Five In A Row - увлекательный режим для любителей словесных головоломок. Отгадывайте слова, улучшайте свои лексические и логические навыки.
+    p Освободите пленников в каждом режиме, отгадав 25 слов и вернув им цвет.
+    p.mb-3 Наслаждайтесь простой, но захватывающей игрой!
   va-card-actions
     va-button(color='success', @click='$emit("start")') Начать игру
     va-button(color='warning', @click='isOpen = true') Как играть?
 </template>
 
 <script setup lang="ts">
-defineEmits<{
-  (e: 'start')
-}>()
+defineEmits<{ (e: 'start') }>()
 
 const isOpen = ref(false)
 </script>

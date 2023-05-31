@@ -1,6 +1,17 @@
 <template lang="pug">
 va-card
-  va-card-title {{ _difficulty.label }}
+  .flex
+    .flex-col.mx-5.w-24
+      client-only
+        img(
+          :src='"/five-in-a-row/level" + statistics.difficulty + ".png"',
+          :style='{ filter: `grayscale(` + grayscale + "%)" }'
+        )
+    .flex-col
+      va-card-title {{ _difficulty.label }}
+      va-card-content
+        em {{ fiveInARowReplicas[statistics.difficulty].name }}:
+        p.va-text-bold {{ replica }}
   va-card-content.whitespace-normal
     p.mb-3 {{ _difficulty.content }}
     .mb-3
@@ -39,13 +50,34 @@ const props = defineProps<{
   statistics: Statistics
 }>()
 
-defineEmits<{
-  (e: 'start')
-}>()
+defineEmits<{ (e: 'start') }>()
 
 const _difficulty = computed(
   () => fiveInARowDifficulties[props.statistics.difficulty]
 )
+
+const grayscale = computed(() => {
+  return (100 - props.statistics.wins * 4) * 2
+})
+
+const replica = computed(() => {
+  const roundUpToNearest = (x) => {
+    const numbers = [5, 10, 15, 20, 25]
+    let nearest = numbers[0]
+
+    for (let i = 0; i < numbers.length; i++) {
+      if (numbers[i] >= x) {
+        nearest = numbers[i]
+        break
+      }
+    }
+
+    return nearest
+  }
+  return fiveInARowReplicas[props.statistics.difficulty][
+    roundUpToNearest(props.statistics.wins)
+  ]
+})
 </script>
 
 <style scoped></style>
