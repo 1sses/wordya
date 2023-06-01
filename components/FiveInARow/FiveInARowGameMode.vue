@@ -8,11 +8,13 @@ va-card
           :style='{ filter: `grayscale(` + grayscale + "%)" }'
         )
     .flex-col
-      va-card-title {{ _difficulty.label }}
       va-card-content
         em {{ fiveInARowReplicas[statistics.difficulty].name }}:
         p.va-text-bold {{ replica }}
   va-card-content.whitespace-normal
+    p.mb-2
+      em {{ fiveInARowReplicas[statistics.difficulty].description }}
+    va-card-title {{ _difficulty.label }}
     p.mb-3 {{ _difficulty.content }}
     .mb-3
       va-chip.m-1(outline, :color='_difficulty.color') Сыграно: {{ statistics.played ?? '-' }}
@@ -57,6 +59,7 @@ const _difficulty = computed(
 )
 
 const grayscale = computed(() => {
+  if (props.statistics.wins >= 25) return 0
   return (100 - props.statistics.wins * 4) * 2
 })
 
